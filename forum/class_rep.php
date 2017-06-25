@@ -78,7 +78,8 @@
             }
      
 
-         	$query = "INSERT INTO content (title, info, image,priority) VALUES (?,?,?,?)";
+          $query = "INSERT INTO content (title, info, image,priority) VALUES (?,?,?,?)";
+           
          	$result = mysqli_prepare($link,$query);
          	mysqli_stmt_bind_param($result,"sssi",$title,$content,$img,$priority);
          	$result_q = mysqli_stmt_execute($result);
@@ -94,6 +95,7 @@
       if(isset($_POST["sort"])){
         $display = "SELECT id,title, info,image, priority FROM content ORDER BY priority ASC";
       }
+
       $result_display = mysqli_query($link,$display);
       while($row = mysqli_fetch_assoc($result_display)) {
         $image_data = $row["image"];

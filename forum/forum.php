@@ -186,15 +186,27 @@
             }
             else if($user_level==2){
               $value = 2;//corresponds to a CR
+              if(isset($_POST["moderated"])){
+               $moderated_user = 0;//moderated user has value of 1
+              }
+              else{
+               $moderated_user = 1;
+              }
+
             }
             else if($user_level==0){
               $value = 0;//corresponds to a student
+              if(isset($_POST["moderated"])){
+              $moderated_user = 0;//moderated user has value of 1
+             }
+      
             }
 
            $ascess_query  = "UPDATE user_info SET ascess_level = ?, moderate_status = ? WHERE username = '".$ascess."' ";
            $result_q = mysqli_prepare($link,$ascess_query);
            mysqli_stmt_bind_param($result_q,"ii",$value,$moderated_user);
            $ascess_change = mysqli_stmt_execute($result_q);
+           $_SESSION["moderated"] = $moderated_user;
           // $result_q = mysqli_query($link, $ascess_query);
 
            if($ascess_change){

@@ -63,20 +63,21 @@ echo "Success: A proper connection to MySQL was made! The first_db database is g
  else if($rows==1 && $level==0 && $password_hash==$hash) {//for a normal user to check against password
     $_SESSION["username"] = $username; 
     $_SESSION["ascess_level"] = $level;
+
 	  header('Location: viewing.php');
    }
 
  else if($rows==1 && $level==2 && $password_hash==$hash){
       $_SESSION["username"] = $username; 
       $_SESSION["ascess_level"] = $level;
+      $_SESSION["moderated"] = $moderated;
 
       header("Location: class_rep.php");
  } 
  else {
   	echo "no";
     echo mysqli_error($link);
-    echo $hash;
-    echo $password_hash;
+
    }
 
   }

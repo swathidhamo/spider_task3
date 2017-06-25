@@ -36,6 +36,18 @@
     height: 50px;
    }
 
+    #new_note{
+    border: 2px solid black;
+    width: 650px;
+    height: 450px;
+    padding-left: 30px;
+   }
+   #new_note: p{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+   }
+
 
 
   </style>
@@ -43,7 +55,13 @@
   <?php
    $link = mysqli_connect("127.0.0.1", "root", "", "first_db");
    session_start();
-   echo "<p>Welcome to the forum " .$_SESSION["username"]. "</p>";
+   if($_SESSION['moderated'] ==0){
+  
+     echo "<p>Welcome to the forum " .$_SESSION["username"]." and you are a moderated editor". "</p>";
+   }
+     else{
+      echo "<p>Welcome to the forum " .$_SESSION["username"]. "</p>";
+    }
 
        //to check if the user has already logged in
      if( empty($_SESSION["username"]) ) {
@@ -53,6 +71,49 @@
      }
  
      else {
+
+      if($_SESSION["moderated"]==0){
+         if(isset($_POST["new"])){
+          if(isset($_POST["title"])){
+            $title = mysqli_real_escape_string($link,$_POST["title"]);
+            $title = stripslashes($title);
+          }
+          if(isset($_POST["content0"])){
+                $content = mysqli_real_escape_string($link,$_POST["content0"]);
+                $content = stripslashes($content);
+          }
+
+          
+            $image = $_FILES['image']['tmp_name'];
+            $img = file_get_contents($image);
+
+            if(isset($_POST["priority"])){
+              $priority = $_POST["priority"];
+            }
+     
+
+          $query = "INSERT INTO approval (title, info, image,priority) VALUES (?,?,?,?)";
+         
+          $result = mysqli_prepare($link,$query);
+          mysqli_stmt_bind_param($result,"sssi",$title,$content,$img,$priority);
+          $result_q = mysqli_stmt_execute($result);
+          if($result_q){
+            echo "Please wait for the approval from admin";
+          }
+
+
+         } 
+      }
+      else{
+        if(isset($_POST["new"])){
+          echo "Warning you are not a moderated editor !!! So you cannot add content.";
+        }
+      }
+
+
+
+
+
       $display = "SELECT id,title, info,image, priority FROM content";
       if(isset($_POST["sort"])){
         $display = "SELECT id,title, info,image, priority FROM content ORDER BY priority ASC";
@@ -86,8 +147,19 @@
 </head>
 <body>
    
-  <form method = "POST" >
+  <form method = "POST" enctype="multipart/form-data"  >
    <input type = "submit" value = "Sort by priority" name = "sort">
+     <div id = "new_note">
+      <p><input type = "text" name = "title" placeholder = "Enter the title"></p>
+      <p><textarea name = "content0" id = "content0" width = "200" height = "200" placeholder = "Enter the contents"></textarea></p>
+      <p><input type = "submit" name = "new" value = "new"></p>
+      <p><input type="file" name="image" /></p>
+       <p><select name = "priority">
+        <option value = "0">Low</option>
+        <option value = "1">Medium</option>
+        <option value = "2">High</option>
+      </select></p>
+    </div>
   </form>
    <a href = "logout.php" class = "link">Logout</a>
 
