@@ -22,10 +22,11 @@ https://make.wordpress.org/core/handbook/tutorials/installing-a-local-server/wam
           upload_max_filesize = 50M (~line 886)
 #Check to see if the server is configured by typing http://localhost . If you get a WAMP server homepage then it is configured
 #Now type http://localhost/phpmyadmin to enter the username as 'root' and password ''  to get the MYSQL database page
-#Now click on the WAMP desktop icon and you should be able to see the WAMP link go green and then you're all set to go
+#Now click on the WAMP desktop icon and you should be able to see the WAMP link go green and then you're all set to go.
+
 Step2: Creating .php files in the wamp64 directory in the C: drive
 #go to www directory in the wamp64 folder and create a directory called forum. This will be the directory we will store all our .php file from now on
-#Create the first file connect.php  and to view the file extablish a link to the server using mysqli_connect() and then type http://localhost/forum/connect.php to view your file
+#Create the first file connect.php  and to view the file extablish a link to the server using mysqli_connect() and then type http://localhost/forum/connect.php to view your file.
 
 Step 3: Creating the MYSQL database
 #Enter the username and password and create a new database called "first_db"
