@@ -3,7 +3,14 @@
 Server routes: 
 for ascessing the database http://localhost/phpmyadmin
 for ascessing the homepage where the credentials have to be entered to login in or create a new user http://localhost/forum/connect.php
-
+About the files: #http://localhost/forum/connect.php is the login page
+#http://localhost/forum/captcha.php is the registration page
+#forum.php is the professor ascess level page
+#viewing.php  is the student ascess page
+#class_rep.php is the class representative page where they can only add but not edit notes
+#edite.php is the professor level page to edit/delete a notice
+#approve.php is the page that has the list of notices that need to be approved
+#logout.php is the logout page
 Step 1: Installation  of the WAMP server
 #Download the WAMP server package from this page http://www.wampserver.com/en/#download-wrapper
 #Choose the director you wish to store it under(wamp64 in the C drive), the default browser (Mozilla Firefox)and the text editor ( Sublime) by choosing their corresponing .exe files by also reffering to the wordpress link below.
