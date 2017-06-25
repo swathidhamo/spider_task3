@@ -33,7 +33,7 @@ Step 3: Creating the MYSQL database
 #Over the course of this task I will be using 3 tables in the database
 #Table 1 : *Create a table called user_info that will store the details of the users and their passwords, their ascess levels and if they are a moderated user
 Here a moderated admin level user will have the value of moderate_status as 0 and if he is a non moderated one his moderate_status =1. 
-ascess_level value is 0 for a student, 1 for an professor/admin, 2 for a Class Representative/
+ascess_level value is 0 for a student, 1 for an professor/admin, 2 for a Class Representative. For table one we are creating an admin with an admin ascess level with the password hashed by MD5.
 
 CREATE TABLE `user_info` ( 
            `id` INT NOT NULL AUTO_INCREMENT , 
@@ -44,7 +44,7 @@ CREATE TABLE `user_info` (
            PRIMARY KEY (`id`));
            
  
-INSERT INTO 'user_info' (username, password, ascess_level, moderate_status) VALUES ('admin', 'midas', '1', '1');   
+INSERT INTO 'user_info' (username, password, ascess_level, moderate_status) VALUES ('admin', MD5('midas'), '1', '1');   
 
 #Table 2: To create a table called 'content' that will store all the notices, it will have columns id, title, info, image, priority
 If the value of priority is 0 then it is a low priority one, if it is 1 then medium and 2 for high
