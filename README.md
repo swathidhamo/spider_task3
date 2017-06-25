@@ -51,7 +51,7 @@ CREATE TABLE `user_info` (
            PRIMARY KEY (`id`));
            
  
-INSERT INTO 'user_info' (username, password, ascess_level, moderate_status) VALUES ('admin', MD5('midas'), '1', '1');   
+INSERT INTO user_info (username, password , ascess_level, moderate_status) VALUES ('admin', MD5('midas'), '1', '1')
 
 #Table 2: To create a table called 'content' that will store all the notices, it will have columns id, title, info, image, priority
 If the value of priority is 0 then it is a low priority one, if it is 1 then medium and 2 for high
