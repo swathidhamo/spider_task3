@@ -26,8 +26,11 @@ session_start();
 
 	 if($_POST['captcha']==$_SESSION['captcha_value'])//to check if the captcha entered matches against the value of the captcha
     	{
-	 	    $username = $_POST["username"];
-	    	$password = $_POST["password"];
+	 	    
+		    $username = mysqli_real_escape_string($link,$_POST['username']);
+                    $username = stripslashes($username);
+	    	    $password = mysqli_real_escape_string($link,$_POST['password']);
+                    $password = stripslashes($password);
 		    $hash = getPasswordHash($password);
         $ascess = 0;
 
