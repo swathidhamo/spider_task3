@@ -75,12 +75,12 @@
       if($_SESSION["moderated"]==0){
          if(isset($_POST["new"])){
           if(isset($_POST["title"])){
-            $title = mysqli_real_escape_string($link,$_POST["title"]);
-            $title = stripslashes($title);
+            $title = $_POST["title"];
+           
           }
           if(isset($_POST["content0"])){
-                $content = mysqli_real_escape_string($link,$_POST["content0"]);
-                $content = stripslashes($content);
+                $content =$_POST["content0"];
+          
           }
 
           
