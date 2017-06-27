@@ -54,8 +54,8 @@
 	<title>The forum</title>
   <?php
    $link = mysqli_connect("127.0.0.1", "root", "", "first_db");
-   session_start();
-   if($_SESSION['moderated'] ==0){
+   session_start();//if ascess level is 3 then it is a student who is a moderated editor
+   if($_SESSION["ascess_level"]==3){
   
      echo "<p>Welcome to the forum " .$_SESSION["username"]." and you are a moderated editor". "</p>";
    }
@@ -72,15 +72,15 @@
  
      else {
 
-      if($_SESSION["moderated"]==0){
+      if($_SESSION["ascess_level"]==3){
          if(isset($_POST["new"])){
           if(isset($_POST["title"])){
             $title = $_POST["title"];
-           
+        
           }
           if(isset($_POST["content0"])){
-                $content =$_POST["content0"];
-          
+                $content = $_POST["content0"];
+                
           }
 
           
