@@ -48,10 +48,16 @@
   <?php
    $link = mysqli_connect("127.0.0.1", "root", "", "first_db");
    session_start();
+   if($_SESSION["ascess_level"]==4){//ascess level of 4 is for a moderated CR
+    echo "<p>Welcome to the forum " .$_SESSION["username"]. " and you are a moderated editor</p>";
+   }
+   else{
    echo "<p>Welcome to the forum " .$_SESSION["username"]. "</p>";
+ }
+
 
       //ascess_level is 2 means that they are a class representative
-     if( empty($_SESSION["username"]) || $_SESSION["ascess_level"] !=2 ) {
+     if( empty($_SESSION["username"]) || (($_SESSION["ascess_level"] !=2)&&($_SESSION["ascess_level"]!=4) ))  {
 
       header("Location: connect.php");
       echo "You do not have the ascess level";
@@ -61,12 +67,12 @@
 
         if(isset($_POST["new"])){
          	if(isset($_POST["title"])){
-         		$title = mysqli_real_escape_string($link,$_POST["title"]);
-         		$title = stripslashes($title);
+         		$title =$_POST["title"]);
+         		
          	}
          	if(isset($_POST["content0"])){
-                $content = mysqli_real_escape_string($link,$_POST["content0"]);
-                $content = stripslashes($content);
+                $contenT =$_POST["content0"]);
+             
          	}
 
          	
@@ -79,12 +85,21 @@
      
 
           $query = "INSERT INTO content (title, info, image,priority) VALUES (?,?,?,?)";
+          if($_SESSION["ascess_level"]==4){
+            $query = "INSERT INTO approval (title, info, image,priority) VALUES (?,?,?,?)";
+          }
            
          	$result = mysqli_prepare($link,$query);
          	mysqli_stmt_bind_param($result,"sssi",$title,$content,$img,$priority);
          	$result_q = mysqli_stmt_execute($result);
          	if($result_q){
-         		echo "Sucessfully added";
+         	
+            if($_SESSION["ascess_level"]==4){
+              echo "Waiting for approval";
+            }
+            else{
+                echo "Sucessfully added";
+            }
          	}
 
 
