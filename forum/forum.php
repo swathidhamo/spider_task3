@@ -178,7 +178,7 @@
             if($user_level==1){
              $value = 1;//for a professor
              if(isset($_POST["moderated"])){
-              $moderated_user = 0;//moderated user has value of 1
+              $moderated_user = 0;//non moderated user has value of 1
              }
              else{
               $moderated_user = 1;
@@ -187,18 +187,17 @@
             else if($user_level==2){
               $value = 2;//corresponds to a CR
               if(isset($_POST["moderated"])){
-               $moderated_user = 0;//moderated user has value of 1
-              }
-              else{
-               $moderated_user = 1;
+                $value = 4;//for a moderated CR
               }
 
             }
             else if($user_level==0){
-              $value = 0;//corresponds to a student
-              if(isset($_POST["moderated"])){
-              $moderated_user = 0;//moderated user has value of 1
+              $value = 0;//for a normal student
+          
+             if(isset($_POST["moderated"])){
+              $value = 3;//for a moderated student
              }
+
       
             }
 
@@ -206,7 +205,7 @@
            $result_q = mysqli_prepare($link,$ascess_query);
            mysqli_stmt_bind_param($result_q,"ii",$value,$moderated_user);
            $ascess_change = mysqli_stmt_execute($result_q);
-           $_SESSION["moderated"] = $moderated_user;
+           
           // $result_q = mysqli_query($link, $ascess_query);
 
            if($ascess_change){
@@ -217,9 +216,6 @@
        }
 
 
-         
-
-  
 
 }
 
@@ -230,12 +226,6 @@
      }
 
 
-   /*  if(isset($_POST["approval"])){
-
-          echo mysqli_error($link);
-          header("Location: approve.php");
-         }
-*/
      //to direct a non moderated admin ascess level member to the approval database
 
        
