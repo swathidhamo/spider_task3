@@ -34,9 +34,9 @@
      
 
      
-     $query_edit = "UPDATE content SET title = '".$edited_title. "', info = '".$edited_info."', image  = ?, priority = '".$priority."' WHERE id = '" .$id. "' ";
+     $query_edit = "UPDATE content SET title = ? , info = ?, image  = ?, priority = ? WHERE id = '" .$id. "' ";
       $edit = mysqli_prepare($link,$query_edit);
-      mysqli_stmt_bind_param($edit, "s",$img);
+      mysqli_stmt_bind_param($edit, "sssi",$edited_title,$edited_info,$img,$priority);
       $result = mysqli_stmt_execute($edit);
     
     
